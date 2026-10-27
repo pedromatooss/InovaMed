@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Casos | Sistema Médico</title>
+
+  <!-- Guarda de acesso: só entra quem fez login como farmacêutico -->
+  <script src="js/auth.js"></script>
+  <script>Auth.exigir("farmaceutico");</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-in">
+      <a class="brand" href="home-farmaceutico.html"><i data-ico="pill"></i><span>Medi+</span></a>
+      <div class="topbar-actions">
+        <button class="icon-btn" type="button" aria-label="Notificações">
+          <i data-ico="bell"></i><span class="dot" id="dot" hidden></span>
+        </button>
+        <div class="profile">
+          <button class="icon-btn" id="profile-btn" type="button" aria-haspopup="true"
+                  aria-expanded="false" aria-controls="profile-menu" aria-label="Menu da conta">
+            <i data-ico="user"></i>
+          </button>
+          <div class="menu" id="profile-menu" hidden>
+            <button type="button" id="logout-btn">Sair</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <header class="who">
+      <div class="who-id">
+        <span class="circle"><i data-ico="medkit"></i></span>
+        <div>
+          <h1 class="who-nome">Olá, <span id="nome"></span></h1>
+          <p class="who-papel">Farmacêutico(a)</p>
+        </div>
+      </div>
+      <button class="btn-soft" id="sair-btn" type="button"><i data-ico="logout"></i>Sair do perfil</button>
+    </header>
+
+    <div class="filters" role="group" aria-label="Filtrar casos">
+      <button class="chip is-active" type="button" data-f="todos" aria-pressed="true"><i data-ico="doc"></i>Todos <span class="count">0</span></button>
+      <button class="chip" type="button" data-f="pendentes" aria-pressed="false"><i data-ico="clock"></i>Pendentes <span class="count">0</span></button>
+      <button class="chip" type="button" data-f="revisados" aria-pressed="false"><i data-ico="check"></i>Revisados <span class="count">0</span></button>
+      <button class="chip chip--grave" type="button" data-f="graves" aria-pressed="false"><i data-ico="alert"></i>Graves <span class="count">0</span></button>
+      <label class="search">
+        <span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Buscar casos</span>
+        <i data-ico="search"></i>
+        <input type="search" id="busca" placeholder="Buscar por nome, remédio ou paciente…" autocomplete="off">
+      </label>
+    </div>
+
+    <div class="grid-2">
+      <section aria-labelledby="casos-titulo">
+        <h2 class="sec-title" id="casos-titulo">Casos para revisar</h2>
+        <p class="sec-sub">Resolva os casos em ordem de prioridade.</p>
+        <ul id="casos"></ul>
+        <p class="empty" id="vazio" hidden>Nenhum caso encontrado para este filtro.</p>
+        <div class="list-foot">
+          <span id="contagem"></span>
+          <nav class="pager" id="pager" aria-label="Paginação"></nav>
+        </div>
+      </section>
+
+      <aside class="col-side" aria-label="Resumo">
+        <a class="tile" id="grave-card" href="#casos-titulo" hidden>
+          <span class="circle" style="--s:84px"><i data-ico="medkit"></i></span>
+          <div>
+            <p class="tile-title" id="grave-titulo"></p>
+            <p class="tile-sub">Precisa de atenção imediata.</p>
+            <span class="tile-link">Ver caso <i data-ico="arrow"></i></span>
+          </div>
+          <i data-ico="chevron"></i>
+        </a>
+
+        <section class="panel" aria-labelledby="fila-titulo">
+          <div class="panel-head"><h2 class="panel-title" id="fila-titulo">Resumo da fila</h2></div>
+          <div class="kpis">
+            <p class="kpi"><b id="k-todos">0</b>Total</p>
+            <p class="kpi"><b id="k-pendentes">0</b>Pendentes</p>
+            <p class="kpi"><b id="k-revisados">0</b>Revisados</p>
+            <p class="kpi kpi--grave"><b id="k-graves">0</b>Grave</p>
+          </div>
+        </section>
+
+        <section class="panel" aria-labelledby="hist-titulo">
+          <div class="panel-head"><h2 class="panel-title" id="hist-titulo">Histórico de revisões</h2></div>
+          <ul id="historico"></ul>
+          <p class="empty" id="hist-vazio" hidden>Nenhuma revisão concluída ainda.</p>
+        </section>
+      </aside>
+    </div>
+
+    <p class="foot"><i data-ico="info"></i>O parecer do farmacêutico não substitui a avaliação de um médico ou farmacêutico.</p>
+  </main>
+
+  <dialog id="dlg" aria-labelledby="dlg-titulo">
+    <h2 id="dlg-titulo"></h2>
+    <dl id="dlg-corpo"></dl>
+    <div class="dlg-actions">
+      <button class="btn-main btn-main--soft" type="button" id="dlg-fechar">Fechar</button>
+      <button class="btn-main" type="button" id="dlg-revisar">Marcar como revisado</button>
+    </div>
+  </dialog>
+
+  <script src="js/common.js"></script>
+  <script src="js/home-farmaceutico.js"></script>
+</body>
+</html>

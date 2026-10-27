@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Início | Sistema Médico</title>
+
+  <!-- Guarda de acesso: só entra quem fez login como cuidador -->
+  <script src="js/auth.js"></script>
+  <script>Auth.exigir("cuidador");</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-in">
+      <a class="brand" href="home-cuidador.html"><i data-ico="pill"></i><span>Medi+</span></a>
+      <div class="topbar-actions">
+        <button class="icon-btn" type="button" aria-label="Notificações">
+          <i data-ico="bell"></i><span class="dot" id="dot" hidden></span>
+        </button>
+        <div class="profile">
+          <button class="icon-btn" id="profile-btn" type="button" aria-haspopup="true"
+                  aria-expanded="false" aria-controls="profile-menu" aria-label="Menu da conta">
+            <i data-ico="user"></i>
+          </button>
+          <div class="menu" id="profile-menu" hidden>
+            <button type="button" id="logout-btn">Sair</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <nav class="dep-row" aria-label="Dependentes">
+      <span class="dep-label">Dependentes</span>
+      <div class="seg" id="dep-tabs" role="group" aria-label="Escolher dependente"></div>
+      <a class="pill pill--ghost" href="#"><span class="mini"><i data-ico="plus"></i></span>Gerenciar dependentes</a>
+    </nav>
+
+    <div class="grid-2">
+      <div class="col-main">
+        <header class="hero">
+          <span class="circle circle--xl"><i data-ico="user"></i></span>
+          <div>
+            <h1 class="hero-title" id="titulo"></h1>
+            <p class="hero-sub">Aqui você encontra os remédios e orientações de forma simples e segura.</p>
+          </div>
+        </header>
+
+        <a class="cta" id="cta" href="verificar-remedio.html">
+          <i data-ico="pill"></i><span>Verificar remédio novo</span><i data-ico="arrow"></i>
+        </a>
+
+        <section class="stats" aria-label="Resumo">
+          <a class="tile" href="#">
+            <span class="circle" style="--s:64px"><i data-ico="pill"></i></span>
+            <div><p class="tile-title">Remédios em uso</p><p class="tile-sub" id="stat-remedios"></p></div>
+            <i data-ico="chevron"></i>
+          </a>
+          <a class="tile" href="#">
+            <span class="circle" style="--s:64px"><i data-ico="doc"></i></span>
+            <div><p class="tile-title">Minhas revisões</p><p class="tile-sub" id="stat-revisoes"></p></div>
+            <i data-ico="chevron"></i>
+          </a>
+        </section>
+
+        <section class="panel" aria-labelledby="rev-titulo">
+          <div class="panel-head">
+            <h2 class="panel-title" id="rev-titulo"></h2>
+            <button class="link-btn" id="ver-todas" type="button" hidden>Ver todas <i data-ico="arrow"></i></button>
+          </div>
+          <ul id="rev-lista"></ul>
+          <p class="empty" id="rev-vazio" hidden>Nenhum remédio foi enviado para revisão ainda.</p>
+        </section>
+      </div>
+
+      <aside class="col-side" aria-label="Avisos e atalhos">
+        <a class="tile tile--ok" id="banner" href="#" hidden>
+          <span class="circle circle--ok" style="--s:72px"><i data-ico="check"></i></span>
+          <div>
+            <p class="tile-title">Revisão concluída!</p>
+            <p class="tile-sub" id="banner-desc"></p>
+            <span class="tile-link">Ver orientação revisada <i data-ico="arrow"></i></span>
+          </div>
+          <i data-ico="chevron"></i>
+        </a>
+
+        <a class="tile tile--grave" id="alerta" href="#" hidden>
+          <span class="circle circle--red" style="--s:64px"><i data-ico="alert"></i></span>
+          <div>
+            <p class="tile-title">Atenção: interação grave!</p>
+            <p class="tile-sub" id="alerta-desc"></p>
+          </div>
+          <i data-ico="chevron"></i>
+        </a>
+
+        <a class="tile" href="#">
+          <span class="circle"><i data-ico="chat"></i></span>
+          <div><p class="tile-title">Conversa com o farmacêutico</p><p class="tile-sub">Tire dúvidas e acompanhe a revisão.</p></div>
+          <i data-ico="chevron"></i>
+        </a>
+
+        <a class="tile" href="#">
+          <span class="circle"><i data-ico="users"></i></span>
+          <div><p class="tile-title">Gerenciar dependentes</p><p class="tile-sub">Adicionar ou remover dependentes.</p></div>
+          <i data-ico="chevron"></i>
+        </a>
+      </aside>
+    </div>
+
+    <p class="foot"><i data-ico="info"></i>Este aplicativo não substitui a orientação de um médico ou farmacêutico.</p>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/home-cuidador.js"></script>
+</body>
+</html>

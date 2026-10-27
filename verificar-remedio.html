@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verificar remédio novo | Sistema Médico</title>
+
+  <!-- Guarda de acesso: paciente ou cuidador -->
+  <script src="js/auth.js"></script>
+  <script>Auth.exigir(["paciente", "cuidador"]);</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <header class="vbar">
+    <a id="voltar" href="#"><i data-ico="chevronLeft"></i>Início</a>
+    <span class="role-chip"><i data-ico="user"></i><span id="perfil-nome"></span></span>
+    <button id="sair" type="button">Sair<i data-ico="logout"></i></button>
+  </header>
+
+  <main class="vmain" id="tela">
+    <div class="dep-pick" id="dep-pick" hidden>
+      <label class="dep-select">
+        <span class="circle" style="--s:36px"><i data-ico="user"></i></span>
+        <span class="dep-cap">Dependente atual<select id="dep" aria-label="Dependente atual"></select></span>
+      </label>
+      <a class="pill pill--soft" href="#"><i data-ico="plus"></i>Gerenciar dependentes</a>
+    </div>
+
+    <div>
+      <h1 class="vtitle">Verificar remédio novo</h1>
+      <p class="vsub" id="sub"></p>
+    </div>
+
+    <section class="uso">
+      <button class="uso-btn" id="uso-btn" type="button" aria-expanded="false" aria-controls="uso-lista">
+        <span class="circle"><i data-ico="pill"></i></span>
+        <span><strong id="uso-titulo"></strong><small id="uso-sub"></small></span>
+        <span class="uso-ver" id="uso-ver">Ver quais <i data-ico="chevron"></i></span>
+      </button>
+      <ul class="uso-lista" id="uso-lista" hidden></ul>
+    </section>
+
+    <form id="form" novalidate>
+      <label class="label" for="remedio">Qual remédio você quer começar a usar?</label>
+      <div class="combo">
+        <input class="input" id="remedio" type="text" placeholder="Ex.: Ibuprofeno" autocomplete="off"
+               role="combobox" aria-expanded="false" aria-controls="sugestoes" aria-autocomplete="list"
+               aria-describedby="dica erro">
+        <button class="clear" id="limpar" type="button" aria-label="Limpar campo" hidden><i data-ico="x"></i></button>
+        <ul class="options" id="sugestoes" role="listbox" aria-label="Sugestões de remédios" hidden></ul>
+      </div>
+      <p class="hint" id="dica">Escreva o nome como está na caixa. Não precisa de dose.</p>
+      <p class="field-error" id="erro" role="alert" hidden><i data-ico="alert"></i><span></span></p>
+      <div class="notice" id="aviso" role="status" hidden></div>
+      <button class="btn-main btn-main--form" id="enviar" type="submit"><i data-ico="search"></i><span>Verificar</span></button>
+    </form>
+  </main>
+
+  <section class="trans" id="transicao" role="status" hidden>
+    <div class="spin-wrap"><span class="spinner"></span><i data-ico="check"></i></div>
+    <h2 id="trans-titulo">Analisando o remédio…</h2>
+    <p id="trans-sub">Isso pode levar alguns segundos.</p>
+  </section>
+
+  <p class="vfoot"><i data-ico="info"></i>Análise preliminar. Não substitui o médico nem o farmacêutico.</p>
+
+  <script src="js/common.js"></script>
+  <script src="js/verificar-remedio.js"></script>
+</body>
+</html>

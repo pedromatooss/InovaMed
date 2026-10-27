@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Início | Sistema Médico</title>
+
+  <!-- Guarda de acesso: só entra quem fez login como paciente -->
+  <script src="js/auth.js"></script>
+  <script>Auth.exigir("paciente");</script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/home-paciente.css">
+</head>
+<body>
+  <main class="home">
+
+    <header class="home-header">
+      <div>
+        <h1 class="greeting">Olá, <strong id="nome-paciente">Paciente</strong></h1>
+        <p class="greeting-sub">Aqui você encontra seus remédios e orientações de forma simples e segura.</p>
+      </div>
+
+      <div class="profile">
+        <button class="profile-btn" id="profile-btn" type="button"
+                aria-haspopup="true" aria-expanded="false" aria-controls="profile-menu"
+                aria-label="Menu da conta">
+          <i data-ico="user"></i>
+        </button>
+        <div class="profile-menu" id="profile-menu" hidden>
+          <button type="button" id="logout-btn">Sair</button>
+        </div>
+      </div>
+    </header>
+
+    <p class="notice" id="enviado" role="status" hidden>
+      <i data-ico="check"></i>Remédio enviado para a revisão do farmacêutico.
+    </p>
+
+    <button class="banner banner--grave" id="alerta" type="button" hidden>
+      <span class="banner-icon"><i data-ico="alert"></i></span>
+      <span class="banner-text">
+        <span class="banner-title">Atenção: interação grave!</span>
+        <span class="banner-desc">Foi identificada uma interação grave entre os seus remédios.</span>
+        <span class="banner-link"><strong>Procure atendimento médico sem esperar a revisão.</strong></span>
+      </span>
+      <i class="chevron" data-ico="chevron"></i>
+    </button>
+
+    <button class="banner" id="banner" type="button" hidden>
+      <span class="banner-icon"><i data-ico="check"></i></span>
+      <span class="banner-text">
+        <span class="banner-title">Revisão concluída!</span>
+        <span class="banner-desc" id="banner-desc"></span>
+        <span class="banner-link">Clique para ver a nova orientação.</span>
+      </span>
+      <i class="chevron chevron--green" data-ico="chevron"></i>
+    </button>
+
+    <a class="cta" href="verificar-remedio.html">
+      <i class="cta-ico" data-ico="pill"></i>
+      <span>Verificar remédio novo</span>
+      <i class="chevron" data-ico="chevron"></i>
+    </a>
+
+    <section class="stats" aria-label="Resumo">
+      <button class="stat" id="stat-uso" type="button" aria-expanded="false" aria-controls="uso-painel">
+        <span class="stat-icon"><i data-ico="pill"></i></span>
+        <span>
+          <span class="stat-title">Remédios em uso</span>
+          <span class="stat-sub" id="stat-remedios"></span>
+        </span>
+      </button>
+      <button class="stat" id="stat-rev" type="button">
+        <span class="stat-icon"><i data-ico="doc"></i></span>
+        <span>
+          <span class="stat-title">Minhas revisões</span>
+          <span class="stat-sub" id="stat-revisoes"></span>
+        </span>
+      </button>
+    </section>
+
+    <section class="uso-painel" id="uso-painel" aria-label="Remédios em uso" hidden>
+      <ul id="uso-lista"></ul>
+    </section>
+
+    <section aria-labelledby="revisoes-titulo">
+      <div class="section-head">
+        <h2 class="section-title" id="revisoes-titulo" tabindex="-1">Minhas revisões</h2>
+        <button class="link-btn" id="ver-todas" type="button" hidden>Ver todas <i data-ico="arrow"></i></button>
+      </div>
+      <ul class="review-list" id="review-list"></ul>
+      <p class="empty" id="review-empty" hidden>Você ainda não enviou nenhum remédio para revisão.</p>
+      <hr class="home-end">
+    </section>
+
+    <p class="foot-note"><i data-ico="info"></i>Este aplicativo não substitui a orientação de um médico ou farmacêutico.</p>
+  </main>
+
+  <dialog id="dlg" aria-labelledby="dlg-titulo">
+    <h2 id="dlg-titulo"></h2>
+    <dl id="dlg-corpo"></dl>
+    <div class="dlg-actions">
+      <button class="dlg-btn" type="button" id="dlg-fechar">Fechar</button>
+    </div>
+  </dialog>
+
+  <script src="js/common.js"></script>
+  <script src="js/home-paciente.js"></script>
+</body>
+</html>
